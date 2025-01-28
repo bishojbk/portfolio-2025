@@ -1,0 +1,127 @@
+{
+  "about": [
+    {
+      "tech": [
+        "HTML5 & CSS3",
+        "JavaScript",
+        "Tailwind CSS",
+        "React JS",
+        "Next JS",
+        "SCSS",
+        "Bootstrap",
+        "PHP",
+        "Laravel"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": 1,
+      "company": "Young Innovations",
+      "linkCompany": "https://yipl.com.np/",
+      "position": "Full Time Web Developer",
+      "startDate": "August 2023",
+      "endDate": "Present",
+      "tech": [
+        "React JS",
+        "Tailwind CSS",
+        "JQuery",
+        "Next JS",
+        "SCSS",
+        "JavaScript"
+      ],
+      "jobDesc": [
+        "Collaborated with a team to develop two governmental admin dashboards with advanced data visualization and user management features, enhancing operational efficiency.",
+        "Designed and developed a user-friendly interface for a travel guide platform in Nepal, enhancing user experience and accessibility.",
+        "Designed, developed, and integrated complex features into the Census Nepal website, improving its functionality, scalability, and user engagement and also intergating visual charts.",
+        "Developed a university website with elegant designs and intuitive user experience.",
+        "Assisted in debugging and optimizing various projects to improve performance and reliability.",
+        "Worked with Git and GitLab for version control and collaborated in an Agile environment to streamline development processes and ensure efficient project delivery."
+      ]
+    },
+    {
+      "id": 2,
+      "company": "Brandspire Creatives (Startup)",
+      "linkCompany": "https://brandspire.com.np/",
+      "position": "Frontend Developer",
+      "startDate": "May 2023",
+      "endDate": "August 2023",
+      "tech": ["Wordpress", "SCSS", "React JS", "JavaScript"],
+      "jobDesc": [
+        "Developed and implemented a visually appealing website for the startup company, enhancing its online presence and user engagement.",
+        "Implemented a custom design for a construction and real estate development business website using WordPress, focusing on user experience, project portfolio, and responsive design.",
+        "Implemented a custom design for a consultancy firm's website using WordPress, emphasizing professional services, client engagement, and responsive design."
+      ]
+    },
+    {
+      "id": 3,
+      "company": "Hyperce",
+      "linkCompany": "https://www.hyperce.io/",
+      "position": "Full Stack Developer (Internship)",
+      "startDate": "January 2023",
+      "endDate": "April 2023",
+      "tech": ["React JS", "Next JS", "JQuery", "JavaScript"],
+      "jobDesc": [
+        "Developed and implemented advanced features for an online document filling platform, optimizing the process and improving user experience.",
+        "Assisted in the development of the very website, contributing to key features and functionality enhancements.",
+        "Studied HTML, CSS, React, and gained foundational knowledge in Django, enhancing front-end development skills and exploring backend technologies."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "title": "Bachelors",
+      "academic": "Bachelor's in Electronics, Communication and Information Technology",
+      "college": "Thapathali Campus, Nepal",
+      "year": "2024"
+    },
+    {
+      "title": "Masters",
+      "academic": "Master's in Information Technology",
+      "college": "Tribhuvan University, Nepal",
+      "year": "Yet to study"
+    }
+  ],
+  "project": [
+    {
+      "title": "Census Nepal",
+      "imgUrl": "./img/project/censusnepal",
+      "linkWebsite": "https://censusnepal.cbs.gov.np/results"
+    },
+    {
+      "title": "Sarang",
+      "imgUrl": "./img/project/sarang.png",
+      "linkWebsite": "https://saarang.com.np/"
+    },
+    {
+      "title": "Culinary Arts",
+      "imgUrl": "./img/project/culinaryarts.png",
+      "linkWebsite": "https://culinaryarts.com.np/"
+    },
+    {
+      "title": "Kinetica",
+      "imgUrl": "./img/project/kinetica.png",
+      "linkWebsite": "https://kinetica.com/"
+    },
+    {
+      "title": "DGM Nepal",
+      "imgUrl": "./img/project/dgm.png",
+      "linkWebsite": "https://dgmnepal.org/en/"
+    },
+    {
+      "title": "Brandspire Creatives",
+      "imgUrl": "./img/project/brandspire.png",
+      "linkWebsite": "https://brandspire.com.np/"
+    },
+    {
+      "title": "Ghar Nirman Guru",
+      "imgUrl": "./img/project/ghar.png",
+      "linkWebsite": "https://gharnirmanguru.com.np/"
+    },
+    {
+      "title": "Make Your Own Meal",
+      "imgUrl": "./img/project/meal.png",
+      "linkWebsite": "https://makeyourownmeal.netlify.app/"
+    }
+  ]
+}
