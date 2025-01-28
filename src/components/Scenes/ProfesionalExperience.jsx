@@ -82,7 +82,7 @@ const ProfesionalExperience = ({ setSelectedPage }) => {
                   visible: { opacity: 1, y: 0 },
                 }}
               >
-                {HandleExperienceDate(value.startDate, value.endDate)}
+                {value.startDate} - {value.endDate}
               </motion.h5>
               <div className="flex gap-x-2">
                 {value.tech.map((items, index) => (
