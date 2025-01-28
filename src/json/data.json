@@ -16,10 +16,32 @@
   ],
   "experience": [
     {
+      "id": 0,
+      "company": "Renegade Insurance",
+      "linkCompany": "https://renegadeinsurance.com/",
+      "position": "Software Development Engineer",
+      "startDate": "April 2025",
+      "endDate": "Present",
+      "tech": [
+        "Tailwind CSS",
+        "React JS",
+        "Next JS",
+        "SCSS",
+        "Bootstrap",
+        "Salesforce",
+        "JavaScript"
+      ],
+      "jobDesc": [
+        "Developing a customer portal for the insured.",
+        "Creating complex features for the customer portal, enhancing user experience and functionality.",
+        "Collaborating with a team to ensure the portal meets business requirements and user needs."
+      ]
+    },
+    {
       "id": 1,
       "company": "Young Innovations",
       "linkCompany": "https://yipl.com.np/",
-      "position": "Full Time Web Developer",
+      "position": "Software Engineer",
       "startDate": "August 2023",
       "endDate": "Present",
       "tech": [
@@ -83,6 +105,11 @@
     }
   ],
   "project": [
+    {
+      "title": "Renegade Insurance",
+      "imgUrl": "./img/project/renegade.png",
+      "linkWebsite": "https://renegadeinsurance.com/"
+    },
     {
       "title": "Census Nepal",
       "imgUrl": "./img/project/censusnepal.png",

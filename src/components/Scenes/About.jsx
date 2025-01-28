@@ -40,15 +40,15 @@ const About = ({ setSelectedPage }) => {
               visible: { opacity: 1, y: 0 },
             }}
           >
-            Hello! I'm a <span className="underline"> Web Developer</span> with
-            about 2 years of experience in frontend development. I have a strong
-            foundation in web programming, focusing on React.js, Next.js,
+            Hello! I&apos;m a <span className="underline"> Web Developer</span>{" "}
+            with about 2.5 years of experience in frontend development. I have a
+            strong foundation in web programming, focusing on React.js, Next.js,
             Tailwind CSS, and TypeScript. <br /> In addition to my frontend
             expertise, I also have worked with Laravel and PHP. My work has
-            spanned governmental and international projects, where I’ve
+            spanned governmental and international projects, where I&apos;ve
             developed scalable web applications, integrated large datasets, and
-            optimized performance to ensure high reliability and efficiency.{" "}
-            <br /> I’m passionate about building user-friendly, visually
+            optimized performance to ensure high reliability and efficiency.
+            <br /> I&apos;m passionate about building user-friendly, visually
             appealing, and highly functional web solutions.
           </motion.p>
           <motion.p
@@ -62,8 +62,9 @@ const About = ({ setSelectedPage }) => {
               visible: { opacity: 1, y: 0 },
             }}
           >
-            I'm open to job opportunities where I can contribute, learn, and
-            grow. If you have a great opportunity that aligns with my skills and{" "}
+            I&apos;m open to job opportunities where I can contribute, learn,
+            and grow. If you have a great opportunity that aligns with my skills
+            and{" "}
             <Link
               className="text-nd-primary cursor-pointer underline"
               to={"experience"}

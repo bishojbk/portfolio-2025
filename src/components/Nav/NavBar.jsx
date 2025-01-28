@@ -50,8 +50,9 @@ const NavBar = ({ selectedPage, setSelectedPage, isNotFoundPage = false }) => {
     >
       <header
         className={
-          isOpen &&
-          "absolute z-30 backdrop-blur-sm bg-nd-dark-1/2 md:bg-transparent md:backdrop-blur-0 transition ease-in duration-200 w-full h-screen md:h-auto"
+          isOpen
+            ? "absolute z-30 backdrop-blur-sm bg-nd-dark-1/2 md:bg-transparent md:backdrop-blur-0 transition ease-in duration-200 w-full h-screen md:h-auto"
+            : undefined
         }
       >
         <nav
