@@ -12,6 +12,7 @@ import Jquery from "../assets/Logos/Jquery";
 import Mysql from "../assets/Logos/Mysql";
 import Javascript from "../assets/Logos/JavaScript";
 import NextJS from "../assets/Logos/NextJS";
+import TypeScript from "../assets/Logos/TypeScript";
 
 const HandleTechIcon = (tech) => {
   if (tech === "React JS")
@@ -92,7 +93,13 @@ const HandleTechIcon = (tech) => {
         <NextJS size={"h-5 md:h-6"} />
       </Tooltip>
     );
-  else return console.log(`error, ${tech} icon not found`);
+  else if (tech === "TypeScript")
+    return (
+      <Tooltip text={tech}>
+        <TypeScript size={"h-5 md:h-6"} />
+      </Tooltip>
+    );
+  else return null;
 };
 
 export default HandleTechIcon;
