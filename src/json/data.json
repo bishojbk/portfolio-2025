@@ -2,15 +2,16 @@
   "about": [
     {
       "tech": [
-        "HTML5 & CSS3",
+        "TypeScript",
         "JavaScript",
-        "Tailwind CSS",
         "React JS",
         "Next JS",
-        "SCSS",
-        "Bootstrap",
-        "PHP",
-        "Laravel"
+        "Node JS",
+        "Tailwind CSS",
+        "Turborepo",
+        "Playwright & Vitest",
+        "OpenAI & Gemini APIs",
+        "Claude Code"
       ]
     }
   ],
@@ -23,18 +24,20 @@
       "startDate": "April 2025",
       "endDate": "Present",
       "tech": [
-        "Tailwind CSS",
+        "TypeScript",
         "React JS",
         "Next JS",
-        "SCSS",
-        "Bootstrap",
-        "Salesforce",
-        "JavaScript"
+        "Node JS",
+        "Tailwind CSS",
+        "Salesforce"
       ],
       "jobDesc": [
-        "Developing a customer portal for the insured.",
-        "Creating complex features for the customer portal, enhancing user experience and functionality.",
-        "Collaborating with a team to ensure the portal meets business requirements and user needs."
+        "Architected AgencyHeight from scratch: a Next.js/React insurance marketplace used by 3,000+ agents, built as a Turborepo + pnpm monorepo with 10+ shared packages (ui, auth, api, state, analytics).",
+        "Shipped an LLM feature on the OpenAI and Gemini APIs that writes profile bios for insurance agents from their NPN.",
+        "Cut bundle size by 30% and improved Core Web Vitals scores by 46% versus the legacy platform.",
+        "Set the engineering standards the team follows: strict TypeScript, Biome, Husky + commitlint, a feature → dev → qa → production flow and Dockerized builds; review pull requests and prepare releases.",
+        "Built the design system (shadcn/ui, Radix UI, shared Tailwind preset) and the data layer (TanStack Query, Zustand, React Hook Form + Zod); set up Vitest, Playwright and axe-core testing with Sentry and Datadog in production.",
+        "Led the insured customer portal, now driving 70–100 policy inquiries a week at about 20% conversion into the agent sales pipeline."
       ]
     },
     {
@@ -43,22 +46,21 @@
       "linkCompany": "https://yipl.com.np/",
       "position": "Software Engineer",
       "startDate": "August 2023",
-      "endDate": "Present",
+      "endDate": "April 2025",
       "tech": [
         "React JS",
-        "Tailwind CSS",
-        "JQuery",
         "Next JS",
+        "Tailwind CSS",
         "SCSS",
+        "JQuery",
         "JavaScript"
       ],
       "jobDesc": [
-        "Collaborated with a team to develop two governmental admin dashboards with advanced data visualization and user management features, enhancing operational efficiency.",
-        "Designed and developed a user-friendly interface for a travel guide platform in Nepal, enhancing user experience and accessibility.",
-        "Designed, developed, and integrated complex features into the Census Nepal website, improving its functionality, scalability, and user engagement and also intergating visual charts.",
-        "Developed a university website with elegant designs and intuitive user experience.",
-        "Assisted in debugging and optimizing various projects to improve performance and reliability.",
-        "Worked with Git and GitLab for version control and collaborated in an Agile environment to streamline development processes and ensure efficient project delivery."
+        "Built the interactive visualization layer of the Census Nepal 2021 portal, turning raw demographic data into accessible, citizen-facing charts on tight government timelines.",
+        "Shipped internal admin dashboards for the Municipal Association of Nepal (293 municipalities) and the World Bank–funded DGM Nepal program: data visualization, user management and daily reporting.",
+        "Owned the frontend of Sarang, a responsive travel-guide platform built for low-bandwidth mobile users and desktops across Nepal.",
+        "Developed a university website with an elegant design and intuitive user experience.",
+        "Collaborated with product, design and backend teams in an Agile, Git/GitLab workflow to ship filtering, analytics dashboards and dynamic forms against REST APIs."
       ]
     },
     {
@@ -66,13 +68,12 @@
       "company": "Brandspire Creatives (Startup)",
       "linkCompany": "https://brandspire.com.np/",
       "position": "Frontend Developer",
-      "startDate": "May 2023",
+      "startDate": "April 2023",
       "endDate": "August 2023",
       "tech": ["Wordpress", "SCSS", "React JS", "JavaScript"],
       "jobDesc": [
-        "Developed and implemented a visually appealing website for the startup company, enhancing its online presence and user engagement.",
-        "Implemented a custom design for a construction and real estate development business website using WordPress, focusing on user experience, project portfolio, and responsive design.",
-        "Implemented a custom design for a consultancy firm's website using WordPress, emphasizing professional services, client engagement, and responsive design."
+        "Built conversion-focused marketing sites and custom WordPress solutions for construction, real estate and consultancy clients.",
+        "Translated designs into pixel-accurate, responsive builds focused on project portfolios, client engagement and performance."
       ]
     },
     {
@@ -81,27 +82,19 @@
       "linkCompany": "https://www.hyperce.io/",
       "position": "Full Stack Developer (Internship)",
       "startDate": "January 2023",
-      "endDate": "April 2023",
+      "endDate": "March 2023",
       "tech": ["React JS", "Next JS", "JQuery", "JavaScript"],
       "jobDesc": [
-        "Developed and implemented advanced features for an online document filling platform, optimizing the process and improving user experience.",
-        "Assisted in the development of the very website, contributing to key features and functionality enhancements.",
-        "Studied HTML, CSS, React, and gained foundational knowledge in Django, enhancing front-end development skills and exploring backend technologies."
+        "Shipped features for an online document-filling platform and the company website, plus user-facing optimizations and production bug fixes."
       ]
     }
   ],
   "education": [
     {
-      "title": "Bachelors",
-      "academic": "Bachelor's in Electronics, Communication and Information Technology",
-      "college": "Thapathali Campus, Nepal",
+      "title": "Bachelor's",
+      "academic": "Bachelor of Engineering in Electronics, Communication & Information Engineering",
+      "college": "Thapathali Campus, Institute of Engineering, Tribhuvan University",
       "year": "2024"
-    },
-    {
-      "title": "Masters",
-      "academic": "Master's in Information Technology",
-      "college": "Tribhuvan University, Nepal",
-      "year": "Yet to study"
     }
   ],
   "project": [
@@ -114,6 +107,26 @@
       "title": "Census Nepal",
       "imgUrl": "./img/project/censusnepal.png",
       "linkWebsite": "https://censusnepal.cbs.gov.np/results"
+    },
+    {
+      "title": "a11y-beast — WCAG 2.2 scanner",
+      "imgUrl": "./img/project/a11y-beast.png",
+      "linkWebsite": "https://github.com/bishojbk/a11y-beast"
+    },
+    {
+      "title": "clairvoy — Claude Code cost optimizer",
+      "imgUrl": "./img/project/clairvoy.png",
+      "linkWebsite": "https://github.com/bishojbk/clairvoy"
+    },
+    {
+      "title": "DGM Nepal",
+      "imgUrl": "./img/project/dgm.png",
+      "linkWebsite": "https://dgmnepal.org/en/"
+    },
+    {
+      "title": "Nepal Tax Calculator",
+      "imgUrl": "./img/project/nepal-tax-calc.png",
+      "linkWebsite": "https://github.com/bishojbk/nepal-tax-calc"
     },
     {
       "title": "Sarang",
@@ -129,11 +142,6 @@
       "title": "Kinetica",
       "imgUrl": "./img/project/kinetica.png",
       "linkWebsite": "https://kinetica.com/"
-    },
-    {
-      "title": "DGM Nepal",
-      "imgUrl": "./img/project/dgm.png",
-      "linkWebsite": "https://dgmnepal.org/en/"
     },
     {
       "title": "Brandspire Creatives",
