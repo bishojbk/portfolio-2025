@@ -40,16 +40,18 @@ const About = ({ setSelectedPage }) => {
               visible: { opacity: 1, y: 0 },
             }}
           >
-            Hello! I&apos;m a <span className="underline"> Web Developer</span>{" "}
-            with about 2.5 years of experience in frontend development. I have a
-            strong foundation in web programming, focusing on React.js, Next.js,
-            Tailwind CSS, and TypeScript. <br /> In addition to my frontend
-            expertise, I also have worked with Laravel and PHP. My work has
-            spanned governmental and international projects, where I&apos;ve
-            developed scalable web applications, integrated large datasets, and
-            optimized performance to ensure high reliability and efficiency.
-            <br /> I&apos;m passionate about building user-friendly, visually
-            appealing, and highly functional web solutions.
+            Hello! I&apos;m a{" "}
+            <span className="underline">software engineer</span> with 3+ years
+            of building production web products with React, Next.js, TypeScript
+            and Node.js. <br /> Today I work remotely for a US insurance
+            company, where I architected the Next.js monorepo behind a
+            marketplace used by more than 3,000 agents, set the engineering
+            standards the team follows, and shipped an LLM feature on the
+            OpenAI and Gemini APIs. Before that I built public-sector platforms
+            in Nepal, including the national census portal. <br /> I care about
+            performance, accessibility and owning features end to end, and I
+            work AI-first: Claude Code is my main tool, and every line it writes
+            gets reviewed.
           </motion.p>
           <motion.p
             className="text-nd-white text-base sm:text-lg text-justify tracking-wide"

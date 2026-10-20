@@ -13,24 +13,34 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiFramer,
-  SiWebflow,
   SiSass,
+  SiNodedotjs,
+  SiTurborepo,
+  SiVitest,
+  SiDocker,
+  SiOpenai,
+  SiClaude,
 } from "react-icons/si";
 import "./index.css";
 
 const Skills = ({ setSelectedPage }) => {
   const skills = [
-    { name: "HTML", icon: <FaHtml5 color="#b7b4d2" size={60} /> },
-    { name: "CSS", icon: <FaCss3Alt color="#b7b4d2" size={60} /> },
+    { name: "TypeScript", icon: <SiTypescript color="#b7b4d2" size={60} /> },
     { name: "JavaScript", icon: <FaJs color="#b7b4d2" size={60} /> },
     { name: "React JS", icon: <FaReact color="#b7b4d2" size={60} /> },
     { name: "Next JS", icon: <SiNextdotjs color="#b7b4d2" size={60} /> },
+    { name: "Node JS", icon: <SiNodedotjs color="#b7b4d2" size={60} /> },
     { name: "Tailwind", icon: <SiTailwindcss color="#b7b4d2" size={60} /> },
+    { name: "Turborepo", icon: <SiTurborepo color="#b7b4d2" size={60} /> },
+    { name: "Vitest", icon: <SiVitest color="#b7b4d2" size={60} /> },
+    { name: "Docker", icon: <SiDocker color="#b7b4d2" size={60} /> },
+    { name: "OpenAI API", icon: <SiOpenai color="#b7b4d2" size={60} /> },
+    { name: "Claude Code", icon: <SiClaude color="#b7b4d2" size={60} /> },
+    { name: "Framer Motion", icon: <SiFramer color="#b7b4d2" size={60} /> },
     { name: "SCSS", icon: <SiSass color="#b7b4d2" size={60} /> },
-    { name: "TypeScript", icon: <SiTypescript color="#b7b4d2" size={60} /> },
-    { name: "Framer", icon: <SiFramer color="#b7b4d2" size={60} /> },
+    { name: "HTML", icon: <FaHtml5 color="#b7b4d2" size={60} /> },
+    { name: "CSS", icon: <FaCss3Alt color="#b7b4d2" size={60} /> },
     { name: "WordPress", icon: <FaWordpress color="#b7b4d2" size={60} /> },
-    { name: "Webflow", icon: <SiWebflow color="#b7b4d2" size={60} /> },
   ];
 
   const softSkills = [

@@ -6,10 +6,7 @@ import { motion } from "framer-motion";
 
 const Home = ({ setSelectedPage }) => {
   const handleClickButton = () => {
-    window.open(
-      "https://drive.google.com/file/d/1FMBXfsxficaxFekehi8J6kWi0tG7g23Z/view?usp=sharing",
-      "_blank"
-    );
+    window.open("/Bisoj_Biswakarma_CV.pdf", "_blank");
   };
   return (
     <div id="home" className="pt-0 sm:pt-12 md:pt-14 lg:pt-0">
@@ -79,7 +76,8 @@ const Home = ({ setSelectedPage }) => {
               visible: { opacity: 1, y: 0 },
             }}
           >
-            I am a Web Developer based on Nepal.
+            Software engineer in Nepal, building fast, accessible products with
+            React, Next.js and TypeScript.
           </motion.h2>
           <motion.div
             initial="hidden"
