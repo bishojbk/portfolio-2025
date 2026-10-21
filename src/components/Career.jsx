@@ -44,13 +44,9 @@ export const Experience = ({ items }) => (
             ))}
           </ul>
           {e.tags.length > 0 && (
-            <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Tech used">
-              {e.tags.map((t) => (
-                <li key={t} className="chip">
-                  {t}
-                </li>
-              ))}
-            </ul>
+            <p className="mt-3 text-[0.9rem] text-muted">
+              <span className="font-semibold text-fg">Stack</span> {e.tags.join(", ")}
+            </p>
           )}
         </div>
       </li>
@@ -59,21 +55,13 @@ export const Experience = ({ items }) => (
 );
 
 export const Toolkit = ({ groups }) => (
-  <div className="surface h-full p-5 sm:p-6">
-    <h3 className="text-[1.15rem] font-bold">Toolkit</h3>
-    <dl className="mt-4 space-y-3">
+  <div>
+    <h3 className="text-[1.4rem] font-bold">Toolkit</h3>
+    <dl className="mt-5 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
       {groups.map((g) => (
-        <div key={g.group} className="grid grid-cols-1 gap-1.5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:items-baseline">
-          <dt className="text-[0.9rem] font-semibold text-muted">{g.group}</dt>
-          <dd>
-            <ul className="flex flex-wrap gap-1.5">
-              {g.items.map((t) => (
-                <li key={t} className="rounded-md border border-line bg-bg px-2 py-0.5 text-[0.85rem] font-semibold">
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </dd>
+        <div key={g.group}>
+          <dt className="font-bold">{g.group}</dt>
+          <dd className="mt-0.5 text-muted">{g.items.join(", ")}</dd>
         </div>
       ))}
     </dl>
@@ -81,21 +69,14 @@ export const Toolkit = ({ groups }) => (
 );
 
 export const Education = ({ edu, resume }) => (
-  <div className="surface-tint flex h-full flex-col p-5 sm:p-6">
-    <span aria-hidden="true" className="grid h-10 w-10 place-items-center rounded-xl bg-link text-bg">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 9l10-5 10 5-10 5L2 9z" />
-        <path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" />
-        <path d="M22 9v6" />
-      </svg>
-    </span>
-    <h3 className="mt-4 text-[1.15rem] font-bold">Education</h3>
-    <p className="mt-2 font-semibold leading-snug">{edu.degree}</p>
-    <p className="mt-1 text-[0.95rem] text-muted">{edu.school}</p>
-    <p className="mt-1 text-[0.95rem] text-muted tnum">{edu.years}</p>
-    <p className="mt-auto pt-5">
+  <div className="rounded-[1.75rem] bg-tint p-6 sm:p-7">
+    <h3 className="text-[1.4rem] font-bold">Education</h3>
+    <p className="mt-4 font-bold leading-snug">{edu.degree}</p>
+    <p className="mt-1 text-muted">{edu.school}</p>
+    <p className="mt-1 text-muted tnum">{edu.years}</p>
+    <p className="mt-6">
       <a href={resume} target="_blank" rel="noopener noreferrer" className="font-semibold">
-        Full CV (PDF)
+        Open the full CV (PDF)
         <span className="sr-only"> (opens in a new tab)</span>
       </a>
     </p>

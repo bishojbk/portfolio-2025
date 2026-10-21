@@ -8,32 +8,34 @@
 /* Clean, high-contrast base with one accent colour. Set in Atkinson Hyperlegible,
    a typeface designed by the Braille Institute for low-vision readers. */
 :root {
+  /* Browser-devtools palette: paper, ink, graphite instrument, one signal blue. */
   --bg: 255 255 255;
-  --fg: 17 20 24;
-  --muted: 84 90 101; /* 7.0:1 on white */
-  --line: 224 227 232;
-  --panel: 246 247 249;
-  --link: 26 79 214; /* 6.6:1 on white */
-  --good: 17 116 59;
-  --warn: 138 83 0;
-  --bad: 180 35 24;
-  --tint: 240 244 255; /* accent-tinted surface */
-  --term: 15 18 24; /* terminal background, same in both themes */
+  --fg: 32 33 36; /* #202124, 16:1 */
+  --muted: 95 99 104; /* #5F6368, 6:1 */
+  --line: 218 220 224;
+  --panel: 241 243 244;
+  --link: 25 103 210; /* #1967D2, 5.4:1 */
+  --good: 24 128 56;
+  --warn: 176 96 0;
+  --bad: 197 34 31;
+  --tint: 232 240 254;
+  --term: 41 42 45; /* #292A2D, the instrument panel in both themes */
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --bg: 14 16 19;
-  --fg: 233 235 239;
-  --muted: 162 168 179;
-  --line: 40 44 51;
-  --panel: 22 25 30;
-  --link: 143 176 255;
-  --good: 111 211 155;
-  --warn: 230 179 92;
-  --bad: 255 138 128;
-  --tint: 22 29 48;
-  --term: 9 11 15;
+  --bg: 32 33 36;
+  --fg: 232 234 237;
+  --muted: 154 160 166;
+  --line: 60 64 67;
+  --panel: 41 42 45;
+  --link: 138 180 248;
+  --good: 129 201 149;
+  --warn: 253 214 99;
+  --bad: 242 139 130;
+  --tint: 37 48 70;
+  --term: 23 24 26;
+  --stage-a: 0.24; /* project stages need a stronger tint on dark */
   color-scheme: dark;
 }
 
@@ -100,20 +102,13 @@
   .tnum {
     font-variant-numeric: tabular-nums;
   }
-  .kicker {
-    @apply text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-link;
-  }
   .chip {
     @apply inline-flex items-center rounded-full border border-line bg-panel px-2.5 py-0.5 text-[0.8rem] font-semibold text-muted;
   }
-  .card {
-    @apply relative overflow-hidden rounded-2xl border border-line bg-bg transition-[border-color,box-shadow,transform] duration-200;
+  .proj {
+    border-radius: 1.75rem;
   }
-  .card:hover {
-    @apply border-link/50;
-    box-shadow: 0 10px 30px -12px rgb(var(--link) / 0.35);
-  }
-  .card:has(.stretched:focus-visible) {
+  .proj:has(.stretched:focus-visible) {
     outline: 3px solid rgb(var(--link));
     outline-offset: 3px;
   }
@@ -167,24 +162,6 @@ dialog.pd[open]::backdrop {
   }
 }
 
-/* Cards drift up a little as they scroll in. Transform only, so contrast checks and layout are unaffected. */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .rise {
-      animation: rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
-    }
-  }
-}
-@keyframes rise {
-  from {
-    transform: translateY(24px);
-  }
-  to {
-    transform: none;
-  }
-}
 
 /* Terminal replay: every line is in the DOM from the start; the reveal is visual only. */
 .js .term-line {
@@ -208,12 +185,26 @@ dialog.pd[open]::backdrop {
     scroll-behavior: auto;
   }
   dialog.pd,
-  dialog.pd::backdrop,
-  .card,
-  .card img {
+  dialog.pd::backdrop {
     transition: none;
   }
   .js .term-line {
     animation: none;
+  }
+}
+
+/* The one orchestrated moment: the waterfall's bars draw in once, in request order. */
+@media (prefers-reduced-motion: no-preference) {
+  .wf-bar {
+    transform-origin: left center;
+    animation: wf-grow 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+@keyframes wf-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }

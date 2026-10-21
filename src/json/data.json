@@ -50,7 +50,8 @@
         "axe-core",
         "Puppeteer"
       ],
-      "span": "md:col-span-7"
+      "stage": "112 138 96",
+      "layout": "wide"
     },
     {
       "id": "tax",
@@ -87,12 +88,13 @@
         "TypeScript",
         "Jest"
       ],
-      "span": "md:col-span-5"
+      "stage": "201 128 58",
+      "layout": "half"
     },
     {
       "id": "clairvoy",
       "title": "clairvoy",
-      "kind": "Open source · npm",
+      "kind": "Open source, on npm",
       "summary": "A command-line tool that reads your Claude Code sessions, shows where the tokens and money went, and writes CLAUDE.md rules that cut the waste.",
       "details": [
         "Install it with npm install -g clairvoy. Below is output from its built-in demo, unedited apart from trimming."
@@ -116,12 +118,13 @@
         "CLI",
         "npm"
       ],
-      "span": "md:col-span-5"
+      "stage": "150 98 214",
+      "layout": "half"
     },
     {
       "id": "renegade",
       "title": "AgencyHeight & customer portal",
-      "kind": "Renegade Insurance · 2025 to now",
+      "kind": "Renegade Insurance, 2025 to now",
       "summary": "AgencyHeight is internal, so I can't show it. It's the Next.js marketplace about 3,000 insurance agents use, and I architected it from an empty repository: a Turborepo monorepo with 10+ shared packages for the UI, auth, API, state and analytics. Compared with the platform it replaced, it ships 30% less JavaScript and scores 46% better on Core Web Vitals.",
       "details": [
         "I also led the customer portal in the screenshot. Policyholders use it to see their policies and ask for service, and it brings in 70 to 100 policy inquiries a week, about 20% of which turn into sales for the agents."
@@ -146,26 +149,13 @@
         "Turborepo",
         "shadcn/ui"
       ],
-      "span": "md:col-span-7",
-      "stats": [
-        [
-          "3,000+",
-          "agents"
-        ],
-        [
-          "−30%",
-          "JavaScript"
-        ],
-        [
-          "+46%",
-          "Web Vitals"
-        ]
-      ]
+      "stage": "36 116 196",
+      "layout": "wide-reverse"
     },
     {
       "id": "census",
       "title": "Census Nepal 2021",
-      "kind": "Young Innovations · for the Central Bureau of Statistics",
+      "kind": "Young Innovations, for the Central Bureau of Statistics",
       "summary": "The public site for Nepal's 2021 census results. I built the interactive layer: the maps, filters and charts that let anyone look up population and housing figures for their district.",
       "details": [],
       "media": {
@@ -188,7 +178,8 @@
         "Data viz",
         "Gov"
       ],
-      "span": "md:col-span-6"
+      "stage": "34 128 138",
+      "layout": "half"
     },
     {
       "id": "saarang",
@@ -216,7 +207,8 @@
         "Responsive",
         "Performance"
       ],
-      "span": "md:col-span-6"
+      "stage": "184 72 58",
+      "layout": "half"
     }
   ],
   "alsoBuilt": [

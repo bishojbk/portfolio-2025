@@ -48,70 +48,64 @@ const Preview = ({ p, active }) => {
       alt=""
       loading="lazy"
       decoding="async"
-      className="h-full w-full object-cover object-left-top transition-transform duration-500 group-hover:scale-[1.03]"
+      className="h-full w-full object-cover object-left-top"
     />
   );
 };
 
+// Each project sits on a stage in its product's own colour, with the media rising from the bottom edge.
+const Stage = ({ p, active }) => (
+  <div
+    className="relative overflow-hidden rounded-[1.75rem] px-5 pt-5 sm:px-8 sm:pt-8"
+    style={{ "--stage": p.stage, background: "rgb(var(--stage) / var(--stage-a, 0.16))" }}
+  >
+    {p.media.type === "video" && (
+      <span
+        aria-hidden="true"
+        className="absolute left-3 top-3 z-[2] inline-flex items-center gap-1.5 rounded-full bg-bg px-2.5 py-1 text-[0.75rem] font-semibold text-fg sm:left-4 sm:top-4"
+      >
+        <span className={`h-1.5 w-1.5 rounded-full ${active ? "bg-bad" : "bg-muted"}`} />
+        {active ? "Playing" : "Real recording"}
+      </span>
+    )}
+    <div
+      className="relative aspect-[16/10] overflow-hidden rounded-t-xl ring-1 ring-black/10"
+      style={{ boxShadow: "0 -12px 40px -16px rgb(var(--stage) / 0.55)" }}
+    >
+      <Preview p={p} active={active} />
+    </div>
+  </div>
+);
+
 const Card = ({ p, onOpen }) => {
   const [active, setActive] = useState(false);
-  const isVideo = p.media.type === "video";
+  const wide = p.layout.startsWith("wide");
+  const reverse = p.layout === "wide-reverse";
   return (
     <article
       id={p.id}
-      className={`card rise group flex flex-col ${p.span}`}
+      className={`proj group relative ${wide ? "md:col-span-12 md:grid md:grid-cols-12 md:items-center md:gap-10" : "md:col-span-6"}`}
       onMouseEnter={() => canHover() && setActive(true)}
       onMouseLeave={() => setActive(false)}
       onFocus={() => setActive(true)}
       onBlur={() => setActive(false)}
     >
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-panel md:aspect-auto md:h-[19rem]">
-        <Preview p={p} active={active} />
-        {isVideo && (
-          <span
-            aria-hidden="true"
-            className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-bg/95 px-2.5 py-1 text-[0.75rem] font-semibold text-fg shadow-sm"
-          >
-            <span className={`h-1.5 w-1.5 rounded-full ${active ? "bg-bad motion-safe:animate-pulse" : "bg-muted"}`} />
-            {active ? "Playing recording" : "Real recording"}
-          </span>
-        )}
-        {p.stats && (
-          // Visual summary only; the same numbers are in the dialog and the Experience section.
-          <div className="absolute inset-x-3 bottom-3 grid grid-cols-3 gap-2" aria-hidden="true">
-            {p.stats.map(([n, l]) => (
-              <div key={l} className="rounded-lg bg-bg/95 px-2.5 py-1.5 shadow-sm">
-                <div className="text-[1.05rem] font-bold leading-tight tnum">{n}</div>
-                <div className="text-[0.72rem] font-semibold text-muted">{l}</div>
-              </div>
-            ))}
-          </div>
-        )}
+      <div className={wide ? `md:col-span-8 ${reverse ? "md:order-2" : ""}` : ""}>
+        <Stage p={p} active={active} />
       </div>
-      <div className="flex flex-1 flex-col p-5">
-        <p className="kicker">{p.kind}</p>
-        <h3 className="mt-1.5 text-[1.3rem] leading-snug">
-          <button type="button" className="stretched" onClick={(e) => onOpen(p.id, e.currentTarget)}>
+      <div className={`mt-5 ${wide ? "md:col-span-4 md:mt-0" : ""}`}>
+        <p className="text-[0.9rem] text-muted">{p.kind}</p>
+        <h3 className={`mt-1 leading-tight ${wide ? "text-[1.75rem]" : "text-[1.4rem]"}`}>
+          <button type="button" className="stretched underline-offset-4 group-hover:underline" onClick={(e) => onOpen(p.id, e.currentTarget)}>
             {p.title}
             <span className="sr-only">, open details</span>
           </button>
         </h3>
-        <p className="mt-1.5 text-[1rem] text-muted">{p.short}</p>
-        <div className="mt-auto flex items-end justify-between gap-3 pt-4">
-          <ul className="flex flex-wrap gap-1.5" aria-label="Built with">
-            {p.tags.map((t) => (
-              <li key={t} className="chip">
-                {t}
-              </li>
-            ))}
-          </ul>
-          <span
-            aria-hidden="true"
-            className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-fg transition-colors group-hover:border-link group-hover:bg-link group-hover:text-bg"
-          >
-            ↗
-          </span>
-        </div>
+        <p className="mt-2 max-w-[34rem]">{p.short}</p>
+        <p className="mt-2 text-[0.9rem] text-muted">
+          <span className="sr-only">Built with </span>
+          {p.tags.join(", ")}
+        </p>
       </div>
     </article>
   );
@@ -176,7 +170,7 @@ const ProjectDialog = ({ p, onClose }) => {
         <div className="p-5 sm:p-8">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="kicker">{p.kind}</p>
+              <p className="text-[0.9rem] text-muted">{p.kind}</p>
               <h2 id="pd-title" className="mt-1.5 text-[1.7rem] font-bold sm:text-[2rem]">
                 {p.title}
               </h2>
@@ -202,13 +196,9 @@ const ProjectDialog = ({ p, onClose }) => {
               ))}
             </div>
             <div className="space-y-4">
-              <ul className="flex flex-wrap gap-1.5" aria-label="Built with">
-                {p.tags.map((t) => (
-                  <li key={t} className="chip">
-                    {t}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-[0.9rem] text-muted">
+                <span className="font-semibold text-fg">Built with</span> {p.tags.join(", ")}
+              </p>
               <ul className="flex flex-col gap-2">
                 {p.embed && !live && (
                   <li>
@@ -220,8 +210,8 @@ const ProjectDialog = ({ p, onClose }) => {
                 {p.links.map((l) => (
                   <li key={l.url}>
                     <a className="btn w-full justify-center" href={l.url} {...ext}>
-                      {l.label} <span aria-hidden="true">↗</span>
-                      <span className="sr-only">(opens in a new tab)</span>
+                      {l.label}
+                      <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                   </li>
                 ))}
@@ -281,31 +271,25 @@ const Work = ({ projects, alsoBuilt }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-12">
         {projects.map((p) => (
           <Card key={p.id} p={p} onOpen={open} />
         ))}
       </div>
 
-      <div className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-2">
-        <h3 className="text-[1rem] font-bold">Also built</h3>
-        <ul className="flex flex-wrap gap-2">
-          {alsoBuilt.map((a) => (
-            <li key={a.url}>
-              <a
-                href={a.url}
-                {...ext}
-                className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-[0.9rem] font-semibold text-fg no-underline transition-colors hover:border-link hover:text-link"
-              >
-                {a.label}
-                {a.note && <span className="font-normal text-muted">· {a.note}</span>}
-                <span aria-hidden="true">↗</span>
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <p className="mt-14 max-w-[52rem] text-muted">
+        <span className="font-bold text-fg">Also built: </span>
+        {alsoBuilt.map((a, i) => (
+          <React.Fragment key={a.url}>
+            <a href={a.url} {...ext}>
+              {a.label}
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            {a.note && ` (${a.note})`}
+            {i < alsoBuilt.length - 1 ? ", " : "."}
+          </React.Fragment>
+        ))}
+      </p>
 
       <ProjectDialog p={current} onClose={close} />
     </>
