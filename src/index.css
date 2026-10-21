@@ -1,129 +1,111 @@
-@import "@fontsource/instrument-serif/400.css";
-@import "@fontsource/instrument-serif/400-italic.css";
-@import "@fontsource-variable/schibsted-grotesk";
-@import "@fontsource/ibm-plex-mono/400.css";
-@import "@fontsource/ibm-plex-mono/500.css";
-
-/* Devanagari name only: subset of Tiro Devanagari Hindi (12 KB instead of 99 KB).
-   If the Nepali spelling changes, re-run:
-   pyftsubset node_modules/@fontsource/tiro-devanagari-hindi/files/tiro-devanagari-hindi-devanagari-400-normal.woff2 \
-     --text="<new name>" --layout-features='*' --flavor=woff2 --output-file=public/fonts/tiro-name.woff2 */
-@font-face {
-  font-family: "Tiro Devanagari Hindi";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/tiro-name.woff2") format("woff2");
-}
+@import "@fontsource-variable/atkinson-hyperlegible-next/wght.css";
+@import "@fontsource-variable/atkinson-hyperlegible-mono/wght.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- Theme tokens (RGB triplets so Tailwind can apply alpha) ---------- */
+/* Plain, high-contrast document look. Set in Atkinson Hyperlegible,
+   a typeface designed by the Braille Institute for low-vision readers. */
 :root {
-  --paper: 243 238 228; /* #F3EEE4 */
-  --paper-2: 234 227 214; /* #EAE3D6 */
-  --ink: 23 21 15; /* #17150F */
-  --ink-2: 79 74 65; /* #4F4A41 */
-  --ink-3: 107 101 91; /* #6B655B */
-  --accent: 184 16 44; /* #B8102C */
-  --rule: 211 203 187; /* #D3CBBB */
-  --grain-opacity: 0.05;
+  --bg: 255 255 255;
+  --fg: 17 20 24;
+  --muted: 84 90 101; /* 7.0:1 on white */
+  --line: 224 227 232;
+  --panel: 246 247 249;
+  --link: 26 79 214; /* 6.6:1 on white */
+  --good: 17 116 59;
+  --warn: 138 83 0;
+  --bad: 180 35 24;
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --paper: 19 17 14; /* #13110E */
-  --paper-2: 28 25 21; /* #1C1915 */
-  --ink: 238 232 221; /* #EEE8DD */
-  --ink-2: 185 177 163; /* #B9B1A3 */
-  --ink-3: 149 141 127; /* #958D7F */
-  --accent: 255 92 100; /* #FF5C64 */
-  --rule: 46 42 36; /* #2E2A24 */
-  --grain-opacity: 0.06;
+  --bg: 14 16 19;
+  --fg: 233 235 239;
+  --muted: 162 168 179;
+  --line: 40 44 51;
+  --panel: 22 25 30;
+  --link: 143 176 255;
+  --good: 111 211 155;
+  --warn: 230 179 92;
+  --bad: 255 138 128;
   color-scheme: dark;
 }
 
 @layer base {
   html {
-    @apply bg-paper text-ink font-sans antialiased;
+    @apply bg-bg text-fg font-sans antialiased;
     scroll-behavior: smooth;
-    text-rendering: optimizeLegibility;
     -webkit-text-size-adjust: 100%;
   }
-
   body {
-    @apply bg-paper text-ink;
-    font-size: 1.0625rem;
-    line-height: 1.65;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    @apply bg-bg text-fg;
+    font-size: 1.125rem;
+    line-height: 1.6;
   }
-
-  /* Paper grain: one fixed SVG noise layer, cheap and theme-aware. */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    pointer-events: none;
-    opacity: var(--grain-opacity);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  ::selection {
-    background: rgb(var(--accent) / 0.85);
-    color: rgb(var(--paper));
-  }
-
-  section[id],
-  [id].anchor {
-    scroll-margin-top: 5rem;
-  }
-
-  :focus-visible {
-    outline: 2px solid rgb(var(--accent));
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
   h1,
   h2,
   h3 {
     text-wrap: balance;
+    line-height: 1.2;
   }
-
   p {
     text-wrap: pretty;
+  }
+  a {
+    @apply text-link underline decoration-1 underline-offset-[3px];
+  }
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+  :focus-visible {
+    outline: 3px solid rgb(var(--link));
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  section[id] {
+    scroll-margin-top: 1.5rem;
+  }
+  ::selection {
+    background: rgb(var(--link) / 0.25);
   }
 }
 
 @layer components {
-  .link {
-    @apply underline decoration-rule decoration-1 underline-offset-4 transition-colors duration-200;
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-md border border-line bg-bg px-3.5 py-2 text-[0.95rem] font-semibold text-fg no-underline transition-colors;
   }
-  .link:hover {
-    @apply decoration-accent text-ink;
+  .btn:hover {
+    @apply border-fg;
+    text-decoration: none;
   }
+  .btn-primary {
+    @apply border-link bg-link text-bg;
+  }
+  .btn-primary:hover {
+    @apply border-link;
+    filter: brightness(1.08);
+  }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
 
-  .kicker {
-    @apply font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-3;
+/* Terminal replay: every line is in the DOM from the start; the reveal is visual only. */
+.js .term-line {
+  animation: term-in 0.01s linear both;
+  animation-play-state: paused;
+}
+.js .term.is-playing .term-line {
+  animation-play-state: running;
+}
+@keyframes term-in {
+  from {
+    visibility: hidden;
   }
-
-  .tag {
-    @apply font-mono text-[0.75rem] text-ink-2 border border-rule rounded-full px-2.5 py-0.5 whitespace-nowrap;
-  }
-
-  /* Scroll reveal: content is visible by default; JS opts in. */
-  .js [data-reveal] {
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
-      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .js [data-reveal].is-visible {
-    opacity: 1;
-    transform: none;
+  to {
+    visibility: visible;
   }
 }
 
@@ -131,15 +113,7 @@
   html {
     scroll-behavior: auto;
   }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .js [data-reveal] {
-    opacity: 1;
-    transform: none;
+  .js .term-line {
+    animation: none;
   }
 }

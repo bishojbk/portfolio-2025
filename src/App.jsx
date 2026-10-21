@@ -1,16 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
 import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
+// One page and a 404. A router would add about 10 KB of JavaScript for that.
+const isHome = () => {
+  const path = window.location.pathname.replace(/\/index\.html$/, "/");
+  return path === "/" || path === "";
+};
+
+const App = () => (isHome() ? <Landing /> : <NotFound />);
 
 export default App;
