@@ -29,25 +29,28 @@ function weigh() {
   return { total, js, requests: res.length + 1, cached };
 }
 
-const Row = ({ label, help, value, rate }) => (
-  <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-0.5 border-t border-line py-3 first:border-t-0">
-    <dt>
-      {label}
-      {help && <span className="block text-[0.9rem] text-muted">{help}</span>}
+const Tile = ({ label, abbr, value, rate, hint }) => (
+  <div className="rounded-xl border border-line bg-bg px-3 py-2.5">
+    <dt className="text-[0.78rem] font-semibold text-muted">
+      {label} {abbr && <abbr className="no-underline">{abbr}</abbr>}
     </dt>
-    <dd className="min-w-[8ch] text-right font-mono tnum">
-      {value}
-      {rate && <span className={`block text-[0.85rem] font-sans font-semibold ${RATING_CLASS[rate]}`}>{RATING_TEXT[rate]}</span>}
+    <dd className="mt-0.5 font-mono text-[1.2rem] font-bold leading-tight tnum">{value}</dd>
+    {/* Always one line tall, so a rating appearing never moves anything. */}
+    <dd className={`truncate text-[0.78rem] font-semibold ${rate ? RATING_CLASS[rate] : "text-muted"}`}>
+      {rate ? RATING_TEXT[rate] : hint || " "}
     </dd>
   </div>
 );
 
-const Speed = () => {
+const IMPACT_CLASS = { critical: "text-bad", serious: "text-bad", moderate: "text-warn", minor: "text-muted" };
+
+const LiveChecks = () => {
   const [v, setV] = useState({});
   const [w, setW] = useState(null);
+  const [s, setS] = useState({ state: "idle" });
 
   useEffect(() => {
-    const set = (m) => setV((s) => ({ ...s, [m.name]: m.value }));
+    const set = (m) => setV((prev) => ({ ...prev, [m.name]: m.value }));
     onLCP(set, { reportAllChanges: true });
     onFCP(set);
     onCLS(set, { reportAllChanges: true });
@@ -71,35 +74,6 @@ const Speed = () => {
     };
   }, []);
 
-  return (
-    <div className="rounded-lg border border-line p-5 sm:p-6">
-      <h3 className="text-[1.2rem] font-bold">Speed</h3>
-      <p className="mt-1 text-[0.95rem] text-muted">Core Web Vitals for your visit, via Google's web-vitals library.</p>
-      <dl className="mt-3">
-        <Row label="Largest Contentful Paint" help="When the main content appeared" value={ms(v.LCP)} rate={rating("LCP", v.LCP)} />
-        <Row label="Cumulative Layout Shift" help="How much things jumped around" value={v.CLS == null ? "…" : v.CLS.toFixed(3)} rate={rating("CLS", v.CLS)} />
-        <Row
-          label="Interaction to Next Paint"
-          help={v.INP == null ? "Click or tap anything on the page to measure it" : "How quickly the page responded to you"}
-          value={v.INP == null ? "waiting" : ms(v.INP)}
-          rate={rating("INP", v.INP)}
-        />
-        <Row
-          label="Downloaded so far"
-          help={w && w.cached ? `${w.requests} requests, ${w.cached} from your browser cache` : w ? `${w.requests} requests` : "…"}
-          value={w ? kb(w.total) : "…"}
-        />
-        <Row label="JavaScript" help="Compressed, over the network" value={w ? kb(w.js) : "…"} />
-      </dl>
-    </div>
-  );
-};
-
-const IMPACT_CLASS = { critical: "text-bad", serious: "text-bad", moderate: "text-warn", minor: "text-muted" };
-
-const Accessibility = () => {
-  const [s, setS] = useState({ state: "idle" });
-
   const run = async () => {
     setS({ state: "loading" });
     try {
@@ -116,77 +90,79 @@ const Accessibility = () => {
         incomplete: r.incomplete.length,
         ms: performance.now() - t0,
         version: axe.version,
-        at: new Date(),
       });
     } catch (e) {
       setS({ state: "error", message: e?.message || "The check could not run." });
     }
   };
 
-  const issues = s.state === "done" ? s.violations.reduce((n, v) => n + v.nodes.length, 0) : 0;
+  const issues = s.state === "done" ? s.violations.reduce((n, x) => n + x.nodes.length, 0) : 0;
 
   return (
-    <div className="rounded-lg border border-line p-5 sm:p-6">
-      <h3 className="text-[1.2rem] font-bold">Accessibility</h3>
-      <p className="mt-1 text-[0.95rem] text-muted">
-        Runs axe-core, the engine behind most accessibility testers, against this page in your browser.
-      </p>
-      <div className="mt-4">
-        <button type="button" className="btn btn-primary" onClick={run} disabled={s.state === "loading"}>
-          {s.state === "loading" ? "Checking…" : s.state === "done" ? "Run it again" : "Check this page"}
+    <div className="surface p-4 sm:p-5">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-[1.05rem] font-bold">This page, measured live</h2>
+        <span className="inline-flex items-center gap-1.5 text-[0.78rem] font-semibold text-good">
+          <span aria-hidden="true" className="h-2 w-2 rounded-full bg-good motion-safe:animate-pulse" />
+          In your browser
+        </span>
+      </div>
+      <p className="mt-1 text-[0.85rem] text-muted">Core Web Vitals from Google's web-vitals library. Nothing is hard-coded.</p>
+
+      <dl className="mt-3 grid grid-cols-2 gap-2">
+        <Tile label="Load" abbr="LCP" value={ms(v.LCP)} rate={rating("LCP", v.LCP)} />
+        <Tile label="Layout shift" abbr="CLS" value={v.CLS == null ? "…" : v.CLS.toFixed(3)} rate={rating("CLS", v.CLS)} />
+        <Tile
+          label="Response" abbr="INP"
+          value={v.INP == null ? "–" : ms(v.INP)}
+          rate={rating("INP", v.INP)}
+          hint="Tap anything to measure"
+        />
+        <Tile label="Downloaded" abbr="" value={w ? kb(w.total) : "…"} hint={w ? `JavaScript: ${kb(w.js)}` : ""} />
+      </dl>
+
+      <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border border-line bg-bg px-3 py-2.5">
+        <button type="button" className="btn btn-primary min-w-[10.5rem] shrink-0 justify-center whitespace-nowrap px-3 py-1.5 text-[0.9rem]" onClick={run} disabled={s.state === "loading"}>
+          {s.state === "loading" ? "Checking…" : s.state === "done" ? "Check again" : "Check accessibility"}
         </button>
+        {/* Same two lines in every state, so the result never pushes the page around. */}
+        <div aria-live="polite" className="min-w-[12rem] flex-1 text-[0.85rem] leading-snug">
+          <p className="truncate font-bold">
+            {s.state === "done" ? (
+              <span className={s.violations.length ? "text-bad" : "text-good"}>
+                {s.violations.length === 0 ? "No violations found" : `${issues} issue${issues === 1 ? "" : "s"} found`}
+              </span>
+            ) : s.state === "error" ? (
+              <span className="text-bad">The check didn't run</span>
+            ) : (
+              <span className="text-muted">{s.state === "loading" ? "Running axe-core…" : "axe-core, on this page"}</span>
+            )}
+          </p>
+          <p className="truncate text-muted tnum">
+            {s.state === "done"
+              ? `${s.passes} rules passed · axe-core ${s.version} · ${Math.round(s.ms)} ms`
+              : s.state === "error"
+              ? s.message
+              : "About 150 KB, loaded on demand"}
+          </p>
+        </div>
       </div>
-      {/* Every state has the same shape, so showing the result doesn't push the rest of the page down. */}
-      <div aria-live="polite" className="mt-4">
-        <p className="text-[1.6rem] font-bold leading-tight">
-          {s.state === "done" ? (
-            <span className={s.violations.length ? "text-bad" : "text-good"}>
-              {s.violations.length === 0 ? "No violations found" : `${issues} issue${issues === 1 ? "" : "s"} found`}
-            </span>
-          ) : s.state === "error" ? (
-            <span className="text-bad">The check didn't run</span>
-          ) : (
-            <span className="text-muted">{s.state === "loading" ? "Checking…" : "Not run yet"}</span>
-          )}
-        </p>
-        <p className="mt-1 text-[0.95rem] text-muted tnum">
-          {s.state === "done" ? (
-            <>
-              {s.passes} rules passed{s.incomplete ? `, ${s.incomplete} need a person to check` : ""}. axe-core {s.version},{" "}
-              {Math.round(s.ms)} ms, at {s.at.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}.
-            </>
-          ) : s.state === "error" ? (
-            s.message
-          ) : (
-            "It downloads about 150 KB the first time, so it isn't part of the page load."
-          )}
-        </p>
-        {s.state === "done" && s.violations.length > 0 && (
-          <ul className="mt-3 space-y-2 text-[0.95rem]">
-            {s.violations.map((v) => (
-              <li key={v.id}>
-                <span className={`font-semibold ${IMPACT_CLASS[v.impact] || ""}`}>{v.impact}</span>{" "}
-                <a href={v.helpUrl} target="_blank" rel="noopener noreferrer">
-                  {v.help}
-                </a>{" "}
-                <span className="text-muted">({v.nodes.length})</span>
-              </li>
-            ))}
-          </ul>
-        )}
-        <p className="mt-3 text-[0.9rem] text-muted">
-          Automated checks catch only part of the problems. Keyboard and screen-reader testing still matter.
-        </p>
-      </div>
+      {s.state === "done" && s.violations.length > 0 && (
+        <ul className="mt-3 space-y-1.5 text-[0.9rem]">
+          {s.violations.map((x) => (
+            <li key={x.id}>
+              <span className={`font-semibold ${IMPACT_CLASS[x.impact] || ""}`}>{x.impact}</span>{" "}
+              <a href={x.helpUrl} target="_blank" rel="noopener noreferrer">
+                {x.help}
+              </a>{" "}
+              <span className="text-muted">({x.nodes.length})</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="mt-2 text-[0.78rem] text-muted">Automated checks catch only part of the problems.</p>
     </div>
   );
 };
 
-const Proof = () => (
-  <div className="grid gap-5 md:grid-cols-2">
-    <Speed />
-    <Accessibility />
-  </div>
-);
-
-export default Proof;
+export default LiveChecks;

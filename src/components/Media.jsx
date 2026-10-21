@@ -37,7 +37,7 @@ export const DemoVideo = ({ media }) => {
 
   return (
     <figure>
-      <div className="relative overflow-hidden rounded-lg border border-line bg-panel">
+      <div className="relative overflow-hidden rounded-xl border border-line bg-panel">
         <video
           ref={ref}
           className="block h-auto w-full"
@@ -71,7 +71,7 @@ export const DemoVideo = ({ media }) => {
 
 export const Shot = ({ media }) => (
   <figure>
-    <div className="overflow-hidden rounded-lg border border-line bg-panel">
+    <div className="overflow-hidden rounded-xl border border-line bg-panel">
       <img
         className="block h-auto w-full"
         src={media.src}
@@ -118,7 +118,34 @@ const TERM = [
   ["", "  + No trailing summaries (~3% savings, high confidence)"],
 ];
 
-const TONE = { cmd: "text-fg font-semibold", head: "text-link font-semibold", hot: "text-warn", "": "text-muted" };
+// The terminal is dark in both themes, so its colours are fixed rather than theme tokens.
+const TONE = {
+  cmd: "text-[#eef0f3] font-semibold",
+  head: "text-[#8fb0ff] font-semibold",
+  hot: "text-[#e9b864]",
+  "": "text-[#a9afba]",
+};
+
+// The few lines of the same demo that tell the story, for the small card.
+const MINI = [TERM[0], TERM[9], TERM[17], TERM[24], TERM[25]];
+
+export const MiniTerminal = () => (
+  <div aria-hidden="true" className="flex h-full flex-col bg-term font-mono text-[0.72rem] leading-[1.6] sm:text-[0.78rem]">
+    <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
+      <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+      <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+      <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+    </div>
+    <div className="flex-1 overflow-hidden whitespace-pre px-3 py-3">
+      {MINI.map(([tone, text], i) => (
+        <span key={i} className={`block ${TONE[tone]} ${tone === "cmd" && i ? "mt-2" : ""}`}>
+          {text.replace(/^  /, "")}
+        </span>
+      ))}
+      <span className="mt-1 inline-block h-[1em] w-[0.55em] translate-y-[2px] bg-[#eef0f3] motion-safe:animate-pulse" />
+    </div>
+  </div>
+);
 
 export const Terminal = () => {
   const ref = useRef(null);
@@ -153,10 +180,10 @@ export const Terminal = () => {
   let delay = 0;
   return (
     <figure>
-      <div className="overflow-hidden rounded-lg border border-line bg-panel">
-        <div className="flex items-center justify-between border-b border-line px-4 py-2 text-[0.85rem] text-muted">
+      <div className="overflow-hidden rounded-xl border border-line bg-term">
+        <div className="flex items-center justify-between border-b border-white/10 px-4 py-2 text-[0.85rem] text-[#a9afba]">
           <span>Terminal: clairvoy 0.1.0</span>
-          <button type="button" onClick={replay} className="font-semibold text-link underline-offset-2 hover:underline">
+          <button type="button" onClick={replay} className="font-semibold text-[#8fb0ff] underline-offset-2 hover:underline">
             Replay
           </button>
         </div>

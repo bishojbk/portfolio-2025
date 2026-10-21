@@ -7,8 +7,14 @@
     "timezone": "Asia/Kathmandu",
     "utcOffset": "UTC+5:45",
     "links": [
-      { "label": "GitHub", "url": "https://github.com/bishojbk" },
-      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/bisojbk/" }
+      {
+        "label": "GitHub",
+        "url": "https://github.com/bishojbk"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/bisojbk/"
+      }
     ]
   },
   "projects": [
@@ -29,9 +35,22 @@
         "label": "Screen recording: typing example.com into A11y Beast, running the scan, and scrolling through the report"
       },
       "links": [
-        { "label": "Open A11y Beast", "url": "https://accesslens-green.vercel.app/" },
-        { "label": "Source", "url": "https://github.com/bishojbk/a11y-beast" }
-      ]
+        {
+          "label": "Open A11y Beast",
+          "url": "https://accesslens-green.vercel.app/"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/bishojbk/a11y-beast"
+        }
+      ],
+      "short": "Paste a URL, get 110+ accessibility checks mapped to 16 laws.",
+      "tags": [
+        "Next.js",
+        "axe-core",
+        "Puppeteer"
+      ],
+      "span": "md:col-span-7"
     },
     {
       "id": "tax",
@@ -48,11 +67,27 @@
         "caption": "Recorded on 21 October 2026. You can also run the real calculator right here.",
         "label": "Screen recording: entering a monthly salary of 2,50,000 and then 4,00,000 rupees and watching the in-hand pay update"
       },
-      "embed": { "url": "https://nepal-tax-calc.vercel.app/", "title": "Nepal Tax Calculator, live" },
+      "embed": {
+        "url": "https://nepal-tax-calc.vercel.app/",
+        "title": "Nepal Tax Calculator, live"
+      },
       "links": [
-        { "label": "Open in a new tab", "url": "https://nepal-tax-calc.vercel.app/" },
-        { "label": "Source", "url": "https://github.com/bishojbk/nepal-tax-calc" }
-      ]
+        {
+          "label": "Open in a new tab",
+          "url": "https://nepal-tax-calc.vercel.app/"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/bishojbk/nepal-tax-calc"
+        }
+      ],
+      "short": "Nepal's income tax rules as a bilingual take-home pay calculator.",
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Jest"
+      ],
+      "span": "md:col-span-5"
     },
     {
       "id": "clairvoy",
@@ -62,15 +97,30 @@
       "details": [
         "Install it with npm install -g clairvoy. Below is output from its built-in demo, unedited apart from trimming."
       ],
-      "media": { "type": "terminal" },
+      "media": {
+        "type": "terminal"
+      },
       "links": [
-        { "label": "npm", "url": "https://www.npmjs.com/package/clairvoy" },
-        { "label": "Source", "url": "https://github.com/bishojbk/clairvoy" }
-      ]
+        {
+          "label": "npm",
+          "url": "https://www.npmjs.com/package/clairvoy"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/bishojbk/clairvoy"
+        }
+      ],
+      "short": "Shows where Claude Code's tokens go, then writes rules to cut the waste.",
+      "tags": [
+        "Node.js",
+        "CLI",
+        "npm"
+      ],
+      "span": "md:col-span-5"
     },
     {
       "id": "renegade",
-      "title": "AgencyHeight and the customer portal",
+      "title": "AgencyHeight & customer portal",
       "kind": "Renegade Insurance · 2025 to now",
       "summary": "AgencyHeight is internal, so I can't show it. It's the Next.js marketplace about 3,000 insurance agents use, and I architected it from an empty repository: a Turborepo monorepo with 10+ shared packages for the UI, auth, API, state and analytics. Compared with the platform it replaced, it ships 30% less JavaScript and scores 46% better on Core Web Vitals.",
       "details": [
@@ -84,11 +134,37 @@
         "alt": "Renegade customer portal: an email sign-in form next to a phone showing a list of the customer's policies",
         "caption": "The customer portal's sign-in and policy list."
       },
-      "links": [{ "label": "Customer portal", "url": "https://customer.renegadeinsurance.com/login/email" }]
+      "links": [
+        {
+          "label": "Customer portal",
+          "url": "https://customer.renegadeinsurance.com/login/email"
+        }
+      ],
+      "short": "A marketplace 3,000+ agents use, plus the customer portal.",
+      "tags": [
+        "Next.js",
+        "Turborepo",
+        "shadcn/ui"
+      ],
+      "span": "md:col-span-7",
+      "stats": [
+        [
+          "3,000+",
+          "agents"
+        ],
+        [
+          "−30%",
+          "JavaScript"
+        ],
+        [
+          "+46%",
+          "Web Vitals"
+        ]
+      ]
     },
     {
       "id": "census",
-      "title": "Census Nepal 2021 results",
+      "title": "Census Nepal 2021",
       "kind": "Young Innovations · for the Central Bureau of Statistics",
       "summary": "The public site for Nepal's 2021 census results. I built the interactive layer: the maps, filters and charts that let anyone look up population and housing figures for their district.",
       "details": [],
@@ -100,7 +176,19 @@
         "alt": "Census Nepal 2021 results home page with national totals, featured reports and map filters",
         "caption": "The results home page."
       },
-      "links": [{ "label": "censusnepal.cbs.gov.np", "url": "https://censusnepal.cbs.gov.np/results" }]
+      "links": [
+        {
+          "label": "censusnepal.cbs.gov.np",
+          "url": "https://censusnepal.cbs.gov.np/results"
+        }
+      ],
+      "short": "Maps, filters and charts for Nepal's national census results.",
+      "tags": [
+        "React",
+        "Data viz",
+        "Gov"
+      ],
+      "span": "md:col-span-6"
     },
     {
       "id": "saarang",
@@ -116,42 +204,168 @@
         "alt": "Saarang home page: the headline Discover Stories from Nepal above a search box, beside a photo of Boudhanath Stupa",
         "caption": "Saarang's home page, captured 21 October 2026."
       },
-      "links": [{ "label": "saarang.com.np", "url": "https://saarang.com.np/" }]
+      "links": [
+        {
+          "label": "saarang.com.np",
+          "url": "https://saarang.com.np/"
+        }
+      ],
+      "short": "Travel guide for Nepal, built to work on slow mobile connections.",
+      "tags": [
+        "React",
+        "Responsive",
+        "Performance"
+      ],
+      "span": "md:col-span-6"
     }
   ],
   "alsoBuilt": [
-    { "label": "Internal dashboards for the Municipal Association of Nepal (293 municipalities)", "url": "https://muannepal.org.np/" },
-    { "label": "Internal dashboards for the World Bank–funded DGM Nepal program", "url": "https://dgmnepal.org/en/" },
-    { "label": "Culinary Arts", "url": "https://culinaryarts.com.np/" },
-    { "label": "Ghar Nirman Guru", "url": "https://gharnirmanguru.com.np/" },
-    { "label": "Kinetica", "url": "https://kinetica.com/" },
-    { "label": "Brandspire Creatives", "url": "https://brandspire.com.np/" }
+    {
+      "label": "MuAN dashboards",
+      "note": "293 municipalities",
+      "url": "https://muannepal.org.np/"
+    },
+    {
+      "label": "DGM Nepal dashboards",
+      "note": "World Bank–funded",
+      "url": "https://dgmnepal.org/en/"
+    },
+    {
+      "label": "Culinary Arts",
+      "url": "https://culinaryarts.com.np/"
+    },
+    {
+      "label": "Ghar Nirman Guru",
+      "url": "https://gharnirmanguru.com.np/"
+    },
+    {
+      "label": "Kinetica",
+      "url": "https://kinetica.com/"
+    },
+    {
+      "label": "Brandspire Creatives",
+      "url": "https://brandspire.com.np/"
+    }
   ],
   "experience": [
     {
       "dates": "Apr 2025 – now",
+      "current": true,
       "role": "Software Development Engineer",
       "company": "Renegade Insurance",
-      "note": "Remote, US. AgencyHeight, the customer portal, an LLM feature on the OpenAI and Gemini APIs, and the team's engineering standards."
+      "where": "Remote, US",
+      "highlights": [
+        "Architected **AgencyHeight**, a Next.js marketplace **3,000+ agents** use: a Turborepo monorepo with **10+ shared packages**.",
+        "Shipped **30% less JavaScript** and **46% better Core Web Vitals** than the platform it replaced.",
+        "Led the customer portal: **70–100 policy inquiries a week**, about **20%** of them turning into sales.",
+        "Set the team's frontend standards and testing: strict TypeScript, Biome, Vitest, Playwright, axe-core, Sentry."
+      ],
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Turborepo",
+        "TanStack Query",
+        "shadcn/ui",
+        "Playwright",
+        "OpenAI & Gemini APIs"
+      ]
     },
     {
       "dates": "Aug 2023 – Apr 2025",
       "role": "Software Engineer",
       "company": "Young Innovations",
-      "note": "Census Nepal 2021, MuAN and DGM Nepal dashboards, Saarang."
+      "where": "Nepal",
+      "highlights": [
+        "Built the interactive charts of the **Census Nepal 2021** portal for the Central Bureau of Statistics.",
+        "Shipped admin dashboards for **293 municipalities** (MuAN) and the World Bank–funded DGM Nepal program.",
+        "Owned the frontend of **Saarang**, a travel guide built for low-bandwidth mobile users."
+      ],
+      "tags": [
+        "React",
+        "Data visualization",
+        "REST APIs"
+      ]
     },
     {
       "dates": "Apr – Aug 2023",
       "role": "Frontend Developer",
       "company": "Brandspire Creatives",
-      "note": "Marketing sites and custom WordPress themes for clients."
+      "where": "Nepal",
+      "highlights": [
+        "Built marketing sites and custom WordPress themes for construction and consultancy clients."
+      ],
+      "tags": [
+        "WordPress",
+        "Responsive builds"
+      ]
     },
     {
       "dates": "Jan – Mar 2023",
       "role": "Full-Stack Developer Intern",
       "company": "Hyperce",
-      "note": "Features for a document-filling platform and the company site."
+      "where": "Nepal",
+      "highlights": [
+        "Shipped frontend features, optimizations and bug fixes for a document-filling platform."
+      ],
+      "tags": []
     }
   ],
-  "education": "B.E. in Electronics, Communication and Information Engineering, Thapathali Campus, IOE, Tribhuvan University, 2024"
+  "education": {
+    "degree": "B.E. in Electronics, Communication & Information Engineering",
+    "school": "Thapathali Campus, IOE, Tribhuvan University",
+    "years": "2020 – 2024"
+  },
+  "toolkit": [
+    {
+      "group": "Frontend",
+      "items": [
+        "React",
+        "Next.js (App Router, RSC)",
+        "TypeScript",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "Radix UI"
+      ]
+    },
+    {
+      "group": "Data & forms",
+      "items": [
+        "TanStack Query",
+        "Zustand",
+        "React Hook Form",
+        "Zod"
+      ]
+    },
+    {
+      "group": "Quality",
+      "items": [
+        "Vitest",
+        "Jest",
+        "Playwright",
+        "axe-core",
+        "Biome"
+      ]
+    },
+    {
+      "group": "Accessibility & speed",
+      "items": [
+        "WCAG 2.2",
+        "ARIA",
+        "Core Web Vitals",
+        "Virtualization",
+        "i18n"
+      ]
+    },
+    {
+      "group": "Tooling",
+      "items": [
+        "Turborepo",
+        "pnpm",
+        "GitHub Actions",
+        "Docker",
+        "Sentry",
+        "Datadog"
+      ]
+    }
+  ]
 }
