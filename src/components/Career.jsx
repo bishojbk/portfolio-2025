@@ -36,7 +36,7 @@ export const Experience = ({ items }) => (
             {e.role} <span className="font-normal text-muted">at</span> {e.company}
           </h3>
           <p className="text-[0.95rem] text-muted">{e.where}</p>
-          <ul className="mt-3 space-y-1.5 text-[1rem] text-muted">
+          <ul className="mt-3 max-w-[35rem] space-y-1.5 text-[1rem] text-muted">
             {e.highlights.map((h) => (
               <li key={h} className="relative pl-4 before:absolute before:left-0 before:top-[0.7em] before:h-1 before:w-1 before:rounded-full before:bg-muted">
                 <Rich text={h} />
@@ -44,7 +44,7 @@ export const Experience = ({ items }) => (
             ))}
           </ul>
           {e.tags.length > 0 && (
-            <p className="mt-3 text-[0.9rem] text-muted">
+            <p className="mt-3 max-w-[35rem] text-[0.9rem] text-muted">
               <span className="font-semibold text-fg">Stack</span> {e.tags.join(", ")}
             </p>
           )}
@@ -56,7 +56,9 @@ export const Experience = ({ items }) => (
 
 export const Toolkit = ({ groups }) => (
   <div>
-    <h3 className="text-[1.4rem] font-bold">Toolkit</h3>
+    <h2 id="toolkit-title" className="text-[1.75rem] font-bold">
+      Toolkit
+    </h2>
     <dl className="mt-5 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
       {groups.map((g) => (
         <div key={g.group}>
@@ -70,7 +72,9 @@ export const Toolkit = ({ groups }) => (
 
 export const Education = ({ edu, resume }) => (
   <div className="rounded-[1.75rem] bg-tint p-6 sm:p-7">
-    <h3 className="text-[1.4rem] font-bold">Education</h3>
+    <h2 id="edu-title" className="text-[1.75rem] font-bold">
+      Education
+    </h2>
     <p className="mt-4 font-bold leading-snug">{edu.degree}</p>
     <p className="mt-1 text-muted">{edu.school}</p>
     <p className="mt-1 text-muted tnum">{edu.years}</p>

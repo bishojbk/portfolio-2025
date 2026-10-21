@@ -132,10 +132,11 @@ const MINI = [TERM[0], TERM[9], TERM[17], TERM[24], TERM[25]];
 export const MiniTerminal = () => (
   <div aria-hidden="true" className="flex h-full flex-col bg-term font-mono text-[0.72rem] leading-[1.6] sm:text-[0.78rem]">
     <div className="border-b border-white/10 px-3 py-2 font-sans text-[0.75rem] font-semibold text-[#BDC1C6]">clairvoy</div>
-    <div className="flex-1 overflow-hidden whitespace-pre px-3 py-3">
+    <div className="flex-1 overflow-hidden whitespace-pre-wrap px-3 py-3 [overflow-wrap:anywhere]">
       {MINI.map(([tone, text], i) => (
         <span key={i} className={`block ${TONE[tone]} ${tone === "cmd" && i ? "mt-2" : ""}`}>
-          {text.replace(/^  /, "")}
+          {/* Column padding collapsed so the line fits a narrow card; the words are unchanged. */}
+          {text.replace(/^  /, "").replace(/ {3,}/g, "  ")}
         </span>
       ))}
       <span className="mt-1 inline-block h-[1em] w-[0.55em] translate-y-[2px] bg-[#E8EAED] motion-safe:animate-pulse" />

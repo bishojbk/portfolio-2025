@@ -26,10 +26,7 @@ const DailyVisual = () => (
     <span className="block pl-3 text-[#BDC1C6]">☑ read the code</span>
     <span className="block pl-3 text-[#BDC1C6]">☑ change + tests</span>
     <span className="block pl-3 text-[#BDC1C6]">☐ checks, open PR</span>
-    <span className="mt-1.5 block">
-      <span className="text-[#81C995]">+ 42</span> <span className="text-[#F28B82]">− 17</span>{" "}
-      <span className="text-[#BDC1C6]">for review</span>
-    </span>
+    <span className="mt-1.5 block text-[#81C995]">● diff ready for my review</span>
   </Window>
 );
 
@@ -129,7 +126,7 @@ const AiWork = () => (
         </li>
       ))}
     </ul>
-    <p className="mt-12 max-w-[52rem] text-muted">
+    <p className="mt-12 max-w-[42rem] text-muted">
       <span className="font-bold text-fg">Tools: </span>
       {TOOLS.join(", ")}. I also built <a href="#clairvoy">clairvoy</a> to see where Claude Code's tokens go.
     </p>

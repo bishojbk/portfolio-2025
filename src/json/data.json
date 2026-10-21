@@ -164,14 +164,9 @@
         "width": 1280,
         "height": 800,
         "alt": "Census Nepal 2021 results home page with national totals, featured reports and map filters",
-        "caption": "The results home page."
+        "caption": "The results home page, captured while the site was online."
       },
-      "links": [
-        {
-          "label": "censusnepal.cbs.gov.np",
-          "url": "https://censusnepal.cbs.gov.np/results"
-        }
-      ],
+      "links": [],
       "short": "Maps, filters and charts for Nepal's national census results.",
       "tags": [
         "React",
@@ -179,7 +174,8 @@
         "Gov"
       ],
       "stage": "34 128 138",
-      "layout": "half"
+      "layout": "half",
+      "offline": "The public site, censusnepal.cbs.gov.np, is offline right now, so there's no link. The screenshot is from when it was up."
     },
     {
       "id": "saarang",

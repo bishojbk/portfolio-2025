@@ -77,8 +77,10 @@ const Waterfall = ({ data, fcp, lcp }) => {
 
   return (
     <div>
-      {/* Screen readers get the same data as a table. */}
-      <table className="sr-only">
+      {/* Screen readers get the same data as a table. The wrapper does the hiding:
+          a <table> ignores the 1px width and would make phones scroll sideways. */}
+      <div className="sr-only">
+      <table>
         <caption>Requests this page made while loading</caption>
         <thead>
           <tr>
@@ -99,6 +101,7 @@ const Waterfall = ({ data, fcp, lcp }) => {
           ))}
         </tbody>
       </table>
+      </div>
 
       <div aria-hidden="true" className="grid grid-cols-[6.5rem_minmax(0,1fr)_3.5rem] items-center gap-x-3 text-[0.75rem]">
         {Array.from({ length: ROWS }, (_, i) => {
@@ -156,9 +159,19 @@ const Waterfall = ({ data, fcp, lcp }) => {
 
 /* ---------- Readouts and the accessibility check ---------- */
 
-const Readout = ({ label, value, rate, hint }) => (
+const Readout = ({ label, abbr, title, value, rate, hint }) => (
   <div className="min-w-0">
-    <dt className="text-[0.72rem] font-semibold text-[#BDC1C6]">{label}</dt>
+    <dt className="truncate text-[0.75rem] font-semibold text-[#BDC1C6]">
+      {label}
+      {abbr && (
+        <>
+          {" "}
+          <abbr title={title} className="font-normal text-[#9AA0A6] no-underline">
+            {abbr}
+          </abbr>
+        </>
+      )}
+    </dt>
     <dd className="text-[1.15rem] font-bold leading-tight tabular-nums text-[#E8EAED]">{value}</dd>
     <dd className={`truncate text-[0.72rem] font-semibold ${rate ? RATING_CLASS[rate] : "text-[#9AA0A6]"}`}>
       {rate ? RATING_TEXT[rate] : hint || " "}
@@ -221,11 +234,19 @@ const LiveChecks = () => {
         <Waterfall data={data} fcp={v.FCP} lcp={v.LCP} />
       </div>
 
-      <dl className="mt-4 grid grid-cols-4 gap-3 border-t border-white/10 pt-4">
-        <Readout label="LCP" value={ms(v.LCP)} rate={rating("LCP", v.LCP)} />
-        <Readout label="CLS" value={v.CLS == null ? "…" : v.CLS.toFixed(3)} rate={rating("CLS", v.CLS)} />
-        <Readout label="INP" value={v.INP == null ? "–" : ms(v.INP)} rate={rating("INP", v.INP)} hint="Tap to measure" />
-        <Readout label="Size" value={data ? kb(data.total) : "…"} hint={data ? `JS ${kb(data.js)}` : ""} />
+      {/* Plain words first; the Core Web Vitals names are there for people who know them. */}
+      <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-white/10 pt-4">
+        <Readout label="Content shown" abbr="LCP" title="Largest Contentful Paint" value={ms(v.LCP)} rate={rating("LCP", v.LCP)} />
+        <Readout label="Layout shift" abbr="CLS" title="Cumulative Layout Shift" value={v.CLS == null ? "…" : v.CLS.toFixed(3)} rate={rating("CLS", v.CLS)} />
+        <Readout
+          label="Response to taps"
+          abbr="INP"
+          title="Interaction to Next Paint"
+          value={v.INP == null ? "–" : ms(v.INP)}
+          rate={rating("INP", v.INP)}
+          hint="Tap anything to measure"
+        />
+        <Readout label="Page size" value={data ? kb(data.total) : "…"} hint={data ? `${kb(data.js)} of it JavaScript` : ""} />
       </dl>
 
       <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-white/10 pt-4">

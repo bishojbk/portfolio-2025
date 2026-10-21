@@ -10,7 +10,7 @@ const reducedMotion = () => mq("(prefers-reduced-motion: reduce)");
 
 // The card's preview. Recordings play only while the card is hovered or focused,
 // so nothing moves on its own. Previews are decorative: the dialog has the described media.
-const Preview = ({ p, active }) => {
+const Preview = ({ p, active, near }) => {
   const ref = useRef(null);
   useEffect(() => {
     const v = ref.current;
@@ -31,7 +31,8 @@ const Preview = ({ p, active }) => {
         loop
         playsInline
         preload="none"
-        poster={p.media.poster}
+        // The poster loads only when the card is about to scroll into view.
+        poster={near ? p.media.poster : undefined}
         aria-hidden="true"
         tabIndex={-1}
       >
@@ -54,7 +55,7 @@ const Preview = ({ p, active }) => {
 };
 
 // Each project sits on a stage in its product's own colour, with the media rising from the bottom edge.
-const Stage = ({ p, active }) => (
+const Stage = ({ p, active, near, touch }) => (
   <div
     className="relative overflow-hidden rounded-[1.75rem] px-5 pt-5 sm:px-8 sm:pt-8"
     style={{ "--stage": p.stage, background: "rgb(var(--stage) / var(--stage-a, 0.16))" }}
@@ -65,40 +66,58 @@ const Stage = ({ p, active }) => (
         className="absolute left-3 top-3 z-[2] inline-flex items-center gap-1.5 rounded-full bg-bg px-2.5 py-1 text-[0.75rem] font-semibold text-fg sm:left-4 sm:top-4"
       >
         <span className={`h-1.5 w-1.5 rounded-full ${active ? "bg-bad" : "bg-muted"}`} />
-        {active ? "Playing" : "Real recording"}
+        {active ? "Playing" : touch ? "Tap to watch" : "Real recording"}
       </span>
     )}
     <div
       className="relative aspect-[16/10] overflow-hidden rounded-t-xl ring-1 ring-black/10"
       style={{ boxShadow: "0 -12px 40px -16px rgb(var(--stage) / 0.55)" }}
     >
-      <Preview p={p} active={active} />
+      <Preview p={p} active={active} near={near} />
     </div>
   </div>
 );
 
 const Card = ({ p, onOpen }) => {
   const [active, setActive] = useState(false);
+  const [near, setNear] = useState(false);
+  const [touch] = useState(() => !canHover());
+  const ref = useRef(null);
   const wide = p.layout.startsWith("wide");
   const reverse = p.layout === "wide-reverse";
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !("IntersectionObserver" in window)) return setNear(true);
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && (setNear(true), io.disconnect()), { rootMargin: "300px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <article
+      ref={ref}
       id={p.id}
-      className={`proj group relative ${wide ? "md:col-span-12 md:grid md:grid-cols-12 md:items-center md:gap-10" : "md:col-span-6"}`}
+      // Side by side only on wide screens; on tablets the text column would be too narrow.
+      className={`proj group relative ${wide ? "md:col-span-12 lg:grid lg:grid-cols-12 lg:items-center lg:gap-10" : "md:col-span-6"}`}
       onMouseEnter={() => canHover() && setActive(true)}
       onMouseLeave={() => setActive(false)}
       onFocus={() => setActive(true)}
       onBlur={() => setActive(false)}
     >
-      <div className={wide ? `md:col-span-8 ${reverse ? "md:order-2" : ""}` : ""}>
-        <Stage p={p} active={active} />
+      <div className={wide ? `lg:col-span-8 ${reverse ? "lg:order-2" : ""}` : ""}>
+        <Stage p={p} active={active} near={near} touch={touch} />
       </div>
-      <div className={`mt-5 ${wide ? "md:col-span-4 md:mt-0" : ""}`}>
+      <div className={`mt-5 ${wide ? "lg:col-span-4 lg:mt-0" : ""}`}>
         <p className="text-[0.9rem] text-muted">{p.kind}</p>
         <h3 className={`mt-1 leading-tight ${wide ? "text-[1.75rem]" : "text-[1.4rem]"}`}>
-          <button type="button" className="stretched underline-offset-4 group-hover:underline" onClick={(e) => onOpen(p.id, e.currentTarget)}>
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            className="stretched underline-offset-4 group-hover:underline"
+            onClick={(e) => onOpen(p.id, e.currentTarget)}
+          >
             {p.title}
-            <span className="sr-only">, open details</span>
           </button>
         </h3>
         <p className="mt-2 max-w-[34rem]">{p.short}</p>
@@ -207,6 +226,7 @@ const ProjectDialog = ({ p, onClose }) => {
                     </button>
                   </li>
                 )}
+                {p.offline && <li className="text-[0.9rem] text-muted">{p.offline}</li>}
                 {p.links.map((l) => (
                   <li key={l.url}>
                     <a className="btn w-full justify-center" href={l.url} {...ext}>
@@ -277,7 +297,7 @@ const Work = ({ projects, alsoBuilt }) => {
         ))}
       </div>
 
-      <p className="mt-14 max-w-[52rem] text-muted">
+      <p className="mt-14 max-w-[42rem] text-muted">
         <span className="font-bold text-fg">Also built: </span>
         {alsoBuilt.map((a, i) => (
           <React.Fragment key={a.url}>

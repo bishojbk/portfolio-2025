@@ -75,7 +75,11 @@ const Landing = () => {
             <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
               {NAV.map(([href, label]) => (
                 <li key={href}>
-                  <a className="font-semibold text-fg no-underline hover:text-link hover:underline" href={href}>
+                  {/* ~44px tall tap area on phones, same look. */}
+                  <a
+                    className="-mx-2 -my-3 inline-block px-2 py-3 font-semibold text-fg no-underline hover:text-link hover:underline md:-my-1 md:py-1"
+                    href={href}
+                  >
                     {label}
                   </a>
                 </li>
@@ -114,7 +118,9 @@ const Landing = () => {
               </a>
             </div>
           </div>
-          <LiveChecks />
+          <div className="max-w-[34rem] lg:max-w-none">
+            <LiveChecks />
+          </div>
         </section>
 
         <section id="work" aria-labelledby="work-title" className="pb-28">
@@ -136,16 +142,22 @@ const Landing = () => {
           </div>
         </section>
 
-        <section id="experience" aria-labelledby="exp-title" className="pb-28">
+        <section id="experience" aria-labelledby="exp-title" className="pb-20">
           <SectionHead id="exp-title" title="Experience" />
           <div className="mt-12">
             <Experience items={data.experience} />
           </div>
-          <div className="mt-20 grid grid-cols-1 gap-12 border-t border-line pt-12 lg:grid-cols-[minmax(0,1fr)_22rem]">
-            <Toolkit groups={data.toolkit} />
-            <Education edu={data.education} resume={p.resume} />
-          </div>
         </section>
+
+        {/* Education gets its own section and heading, apart from work history. */}
+        <div className="grid grid-cols-1 gap-12 border-t border-line pb-28 pt-14 lg:grid-cols-[minmax(0,1fr)_24rem]">
+          <section aria-labelledby="toolkit-title">
+            <Toolkit groups={data.toolkit} />
+          </section>
+          <section id="education" aria-labelledby="edu-title">
+            <Education edu={data.education} resume={p.resume} />
+          </section>
+        </div>
 
         {/* Contact: the address itself is the call to action. */}
         <section id="contact" aria-labelledby="contact-title" className="border-t border-line pb-24 pt-16">
@@ -155,9 +167,11 @@ const Landing = () => {
           <p className="mt-4">
             <a
               href={`mailto:${p.email}`}
-              className="break-all text-[2.2rem] font-extrabold leading-tight tracking-[-0.01em] text-fg decoration-link decoration-[3px] underline-offset-[6px] hover:text-link sm:text-[3.5rem] lg:text-[4.25rem]"
+              className="text-[1.75rem] font-extrabold leading-tight tracking-[-0.01em] text-fg decoration-link decoration-[3px] underline-offset-[6px] hover:text-link sm:text-[3.5rem] lg:text-[4.25rem]"
             >
-              {p.email}
+              {/* If it has to wrap, it wraps after the @, never mid-word. */}
+              {p.email.split("@")[0]}@<wbr />
+              {p.email.split("@")[1]}
             </a>
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
