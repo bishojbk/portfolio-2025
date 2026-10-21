@@ -235,7 +235,7 @@ const LiveChecks = () => {
       </div>
 
       {/* Plain words first; the Core Web Vitals names are there for people who know them. */}
-      <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-white/10 pt-4">
+      <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 border-t min-[360px]:grid-cols-2 border-white/10 pt-4">
         <Readout label="Content shown" abbr="LCP" title="Largest Contentful Paint" value={ms(v.LCP)} rate={rating("LCP", v.LCP)} />
         <Readout label="Layout shift" abbr="CLS" title="Cumulative Layout Shift" value={v.CLS == null ? "…" : v.CLS.toFixed(3)} rate={rating("CLS", v.CLS)} />
         <Readout
