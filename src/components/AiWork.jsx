@@ -49,7 +49,7 @@ const ParallelVisual = () => (
       <Lane name="agent 2" w="70%" />
       <Lane name="agent 3" w="84%" />
     </div>
-    <div className="mt-3 flex flex-wrap items-center gap-1.5 whitespace-nowrap text-[0.7rem] font-semibold">
+    <div className="mt-3 flex items-center gap-1 whitespace-nowrap text-[0.66rem] font-semibold">
       <span className="rounded-md border border-line bg-panel px-1.5 py-0.5">worktrees</span>
       <span className="text-muted">→</span>
       <span className="rounded-md border border-line bg-panel px-1.5 py-0.5">DevTools</span>
@@ -75,10 +75,10 @@ const RulesVisual = () => (
 
 const LlmVisual = () => (
   <div aria-hidden="true" className="flex h-full flex-col justify-center rounded-2xl border border-line bg-bg p-4">
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="rounded-md border border-line bg-panel px-2 py-1 font-mono text-[0.72rem]">NPN 1•••••7</span>
+    <div className="flex items-center gap-1.5 whitespace-nowrap text-[0.68rem]">
+      <span className="rounded-md border border-line bg-panel px-1.5 py-1 font-mono">NPN 1•••••7</span>
       <span className="text-muted">→</span>
-      <span className="whitespace-nowrap rounded-md border border-line px-2 py-1 text-[0.72rem] font-semibold">OpenAI, Gemini</span>
+      <span className="rounded-md border border-line px-1.5 py-1 font-semibold">OpenAI, Gemini</span>
     </div>
     <div className="mt-3 rounded-lg border border-link/30 bg-tint p-2.5">
       <span className="block text-[0.72rem] font-semibold text-link">Agent bio, drafted</span>
